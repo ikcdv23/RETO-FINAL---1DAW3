@@ -9,8 +9,9 @@ public class Registrar {
     public static void Registro() {
         // Información de conexión a la base de datos
         String url = "jdbc:mysql://localhost:3306/videoclub";
-        String usuarioBD = "tu_usuario";
-        String contrasenaBD = "tu_contraseña";
+        String usuarioBD = "root";
+        String contrasenaBD = "1DAW3_BBDD";
+       // conectorBD.conectar();
 
         try (Scanner scanner = new Scanner(System.in)) {
             // Solicitar los datos del nuevo usuario

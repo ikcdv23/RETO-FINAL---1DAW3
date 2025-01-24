@@ -10,8 +10,8 @@ public class LoginUsuario {
     public static void iniciarSesion()  {
         // Información de conexión a la base de datos
         String url = "jdbc:mysql://localhost:3306/videoclub";
-        String usuarioBD = "tu_usuario";
-        String contrasenaBD = "tu_contraseña";
+        String usuarioBD = "root";
+        String contrasenaBD = "1DAW3_BBDD";
 
         try (Scanner scanner = new Scanner(System.in)) {
             // Solicitar las credenciales al usuario
@@ -20,6 +20,8 @@ public class LoginUsuario {
 
             System.out.print("Ingrese su contraseña: ");
             String password = scanner.nextLine();
+            
+            
 
             // Conexión a la base de datos
             Connection conexion = DriverManager.getConnection(url, usuarioBD, contrasenaBD);

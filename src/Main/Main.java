@@ -11,6 +11,7 @@ public class Main {
 		Scanner sc= new Scanner(System.in);
 		conectorBD.conectar();
 		
+		
 		Menus.menuInicial(sc);
 		
 		conectorBD.cerrarConexion();

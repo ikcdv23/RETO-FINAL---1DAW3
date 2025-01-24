@@ -7,9 +7,9 @@ public class Pelicula {
 	protected String autor;
 	protected double precio;
 	protected int codigo_reserva;
-	protected String genero;
+	protected Enum genero;
 	
-	public Pelicula(String nombre, int codigo, String autor, double precio, int codigo_reserva, String genero) {
+	public Pelicula(String nombre, int codigo, String autor, double precio, int codigo_reserva, Enum genero) {
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.autor = autor;
@@ -50,10 +50,10 @@ public class Pelicula {
 	public void setCodigo_reserva(int codigo_reserva) {
 		this.codigo_reserva = codigo_reserva;
 	}
-	public String getGenero() {
+	public Enum getGenero() {
 		return genero;
 	}
-	public void setGenero(String genero) {
+	public void setGenero(Enum genero) {
 		this.genero = genero;
 	}
 	

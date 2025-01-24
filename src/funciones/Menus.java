@@ -46,8 +46,10 @@ public class Menus {
 	public static void iniciarSesion(Scanner sc) {
 
 		System.out.println("Pon tu email:");
+		sc.nextLine();
 		
 		System.out.println("pon la contraseña: ");
+		sc.nextLine();
 		
 		
 	}

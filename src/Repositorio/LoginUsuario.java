@@ -9,7 +9,7 @@ public class LoginUsuario {
 
     public static void iniciarSesion()  {
         // Información de conexión a la base de datos
-        String url = "jdbc:mysql://localhost:3306/tu_base_de_datos";
+        String url = "jdbc:mysql://localhost:3306/videoclub";
         String usuarioBD = "tu_usuario";
         String contrasenaBD = "tu_contraseña";
 

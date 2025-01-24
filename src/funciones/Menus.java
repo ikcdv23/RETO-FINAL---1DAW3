@@ -9,37 +9,41 @@ public class Menus {
 
 
 
-	 public static void menuInicial() throws SQLException {
+	 public static void menuInicial(Scanner sc) throws SQLException {
 		int opcion;
 		System.out.println("Bienvenido a GlobalCinesa elige una opcion:");
 		System.out.println("1. Registrarse");
 		System.out.println("2. Iniciar sesion");
 		opcion=sc.nextInt();
+		sc.nextLine();
 		
 		switch (opcion) {
 		
 		case 1:
-			registrarse();
+			registrarse(sc);
 			break;
 		case 2:
-			iniciarSesion();
+			iniciarSesion(sc);
 			break;
 		}
 	}
 		
-	public static void registrarse() {
+	public static void registrarse(Scanner sc) {
 		
 		System.out.println("Pon tu nombre: ");
-		
+		sc.nextLine();
+	
 		System.out.println("Pon tu email:");
+		sc.nextLine();
 		
 		System.out.println("Pon la contraseña: ");
+		sc.nextLine();
 		
 		
 		
 	}
 	
-	public static void iniciarSesion() {
+	public static void iniciarSesion(Scanner sc) {
 
 		System.out.println("Pon tu email:");
 		

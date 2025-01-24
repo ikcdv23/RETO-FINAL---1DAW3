@@ -5,10 +5,11 @@ import java.util.Scanner;
 public class Menus {
 	private  static Scanner sc= new Scanner(System.in);
 
-	//Hola Adrian
+
 	public static void menuInicial() {
 		int opcion;
 		
+		conectorBD.conectar();
 		System.out.println("Bienvenido a GlobalCinesa elige una opcion:");
 		System.out.println("1. Registrarse");
 		System.out.println("2. Iniciar sesion");

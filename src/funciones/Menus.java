@@ -2,6 +2,7 @@ package funciones;
 import java.sql.SQLException;
 import java.util.Scanner;
 import Repositorio.LoginUsuario;
+import Repositorio.Registrar;
 import conectorBD.conectorBD;
 
 public class Menus {
@@ -20,7 +21,7 @@ public class Menus {
 		switch (opcion) {
 		
 		case 1:
-			
+			Registrar.Registro();
 			break;
 		case 2:
 			LoginUsuario.iniciarSesion();

@@ -42,7 +42,11 @@ public class LoginUsuario {
             if (resultado.next()) {
                 System.out.println("¡Inicio de sesión exitoso!");
                 try {
-                    Menus.menuInicial(scanner);
+
+                   
+
+                    Menus.menuSecundario(sc);
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     System.out.println("Ocurrió un error al regresar al menú inicial.");

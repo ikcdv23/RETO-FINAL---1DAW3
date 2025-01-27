@@ -41,17 +41,21 @@ public class Registrar {
 
             System.out.print("Ingrese una contraseña: ");
             String contra = scanner.nextLine();
+            
+            System.out.print("Ingrese su rol: (administrador/cliente) ");
+            String rol = scanner.nextLine();
 
             // Conexión a la base de datos
             Connection conexion = DriverManager.getConnection(url, usuarioBD, contrasenaBD);
 
             // Consulta SQL para insertar el nuevo usuario
-            String consulta = "INSERT INTO usuario (nombre, dni, email, contraseña) VALUES (?, ?, ?, ?)";
+            String consulta = "INSERT INTO usuario (nombre, dni, email, contraseña, rol) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement sentencia = conexion.prepareStatement(consulta);
             sentencia.setString(1, nombre);
             sentencia.setString(2, dni);
             sentencia.setString(3, email);
             sentencia.setString(4, contra);
+            sentencia.setString(5, rol);
 
             // Ejecutar la inserción
             int filasAfectadas = sentencia.executeUpdate();

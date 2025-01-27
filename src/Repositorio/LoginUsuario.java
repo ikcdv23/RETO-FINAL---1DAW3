@@ -15,11 +15,11 @@ public class LoginUsuario {
 
         try (Scanner scanner = new Scanner(System.in)) {
             // Solicitar las credenciales al usuario
-            System.out.print("Ingrese su nombre de usuario: ");
-            String username = scanner.nextLine();
+            System.out.print("Ingrese su email: ");
+            String email = scanner.nextLine();
 
             System.out.print("Ingrese su contraseña: ");
-            String password = scanner.nextLine();
+            String contra = scanner.nextLine();
             
             
 
@@ -27,10 +27,10 @@ public class LoginUsuario {
             Connection conexion = DriverManager.getConnection(url, usuarioBD, contrasenaBD);
 
             // Consulta SQL para verificar las credenciales
-            String consulta = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
+            String consulta = "SELECT * FROM usuario WHERE email = ? AND contraseña = ?";
             PreparedStatement sentencia = conexion.prepareStatement(consulta);
-            sentencia.setString(1, username);
-            sentencia.setString(2, password);
+            sentencia.setString(1, email);
+            sentencia.setString(2, contra);
 
             ResultSet resultado = sentencia.executeQuery();
 

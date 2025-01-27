@@ -9,8 +9,6 @@ import java.sql.Statement;
 
 
 public class conectorBD {	
-
-
 		private static Connection conexion;
 
 		public static void conectar() {

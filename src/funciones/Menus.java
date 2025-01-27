@@ -18,6 +18,8 @@ public class Menus {
 		System.out.println("Bienvenido a GlobalCinesa elige una opcion:");
 		System.out.println("1. Registrarse");
 		System.out.println("2. Iniciar sesion");
+		System.out.println("3. Mostrar peliculas por genero");
+		System.out.println("4. Mostrar peliculas por nombre");
 		opcion=sc.nextInt();
 		sc.nextLine();
 		
@@ -30,6 +32,11 @@ public class Menus {
 		case 2:
 			LoginUsuario.iniciarSesion();
 			break;
+		case 3:
+			ConsultarPeli.MostarPelisPorGenero();
+			break;
+		case 4:
+			PeliEsp.MostrarPeliculaPorNombre();
 		}
 	}
 		

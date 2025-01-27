@@ -24,42 +24,15 @@ public class Menus {
 		switch (opcion) {
 		
 		case 1:
-
 			Registrar.Registro();
-
-			registrarse(sc);
 			break;
 		case 2:
-			iniciarSesion(sc);
+			LoginUsuario.iniciarSesion();
 			break;
 		}
 	}
 		
-	public static void registrarse(Scanner sc) {
-		
-		System.out.println("Pon tu nombre: ");
-		sc.nextLine();
-	
-		System.out.println("Pon tu email:");
-		sc.nextLine();
-		
-		System.out.println("Pon la contraseña: ");
-		sc.nextLine();
-		
-		
-		
-	}
-	
-	public static void iniciarSesion(Scanner sc) {
 
-		System.out.println("Pon tu email:");
-		sc.nextLine();
-		
-		System.out.println("pon la contraseña: ");
-		sc.nextLine();
-		
-		
-	}
 	
 	public static void menuInicio() {
 		System.out.println("Bienvenido a Global cinesa aqui podra alquilar cualquier pelicula que "

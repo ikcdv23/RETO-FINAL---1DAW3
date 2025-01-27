@@ -10,15 +10,12 @@ import java.sql.Statement;
 
 
 
-
-
-
-
 public class ConsultarPeli {
 	private  static Scanner scanner= new Scanner(System.in);
-	public static  void MostarPelisPorGenero() throws SQLException {
+	public static  void MostarPelisPorGenero(String genero) throws SQLException {
 			 System.out.println("\n--- Mostrar Peliculas por genero ---");
 			 System.out.print("Ingresa el genero (thriller o accion): ");
+		
 
 			 //Hace la consulta para filtrar las pelis por genero
 			 String query = "SELECT * FROM peliculas WHERE genero = ?";

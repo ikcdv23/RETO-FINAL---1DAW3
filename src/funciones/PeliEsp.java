@@ -9,7 +9,7 @@ import conectorBD.conectorBD;
 
 public class PeliEsp {
 	private  static Scanner scanner= new Scanner(System.in);
-	public static  void MostrarPeliculaPorNombre() throws SQLException {
+	public static  void MostrarPeliculaPorNombre(String nombre) throws SQLException {
 			 System.out.println("\n--- Mostrar Peliculas por nombre ---");
 			 System.out.print("Ingresa el genero: ");
 

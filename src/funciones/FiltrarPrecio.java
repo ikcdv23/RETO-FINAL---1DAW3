@@ -9,9 +9,10 @@ import conectorBD.conectorBD;
 
 public class FiltrarPrecio {
 	private  static Scanner scanner= new Scanner(System.in);
-	public static  void MostarPelisPorPrecio() throws SQLException {
+	public static  void MostarPelisPorPrecio(int precio) throws SQLException {
 			 System.out.println("\n--- Mostrar peliculas por precio inferior al introducido ---");
 			 System.out.print("Ingresa el precio");
+			 
 
 
 			 String query = "SELECT * FROM peliculas WHERE precio < ?";

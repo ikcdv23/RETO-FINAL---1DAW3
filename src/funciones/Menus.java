@@ -52,13 +52,13 @@ public class Menus {
 		switch (opcion) {
 		
 			case 1:
-				ConsultarPeli.MostarPelisPorGenero();
+				ConsultarPeli.MostarPelisPorGenero(null);
 				break;
 			case 2:
-				PeliEsp.MostrarPeliculaPorNombre();
+				PeliEsp.MostrarPeliculaPorNombre(null);
 				break;
 			case 3:
-				FiltrarPrecio.MostarPelisPorPrecio();
+				FiltrarPrecio.MostarPelisPorPrecio((Integer) null);
 		 }
 		
 		 }

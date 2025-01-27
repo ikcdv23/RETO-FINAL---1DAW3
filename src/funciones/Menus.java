@@ -24,6 +24,7 @@ public class Menus {
 		switch (opcion) {
 		
 		case 1:
+
 			Registrar.Registro();
 			break;
 		case 2:
@@ -33,7 +34,6 @@ public class Menus {
 	}
 		
 
-	
 	public static void menuInicio() {
 		System.out.println("Bienvenido a Global cinesa aqui podra alquilar cualquier pelicula que "
 				+ "tengamos diaponible en nuestro caltalogo"

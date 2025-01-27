@@ -3,10 +3,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
-public class LoginUsuario {
+import funciones.Menus;
 
+public class LoginUsuario {
+	private  static Scanner sc= new Scanner(System.in);
+	
     public static void iniciarSesion()  {
         // Información de conexión a la base de datos
         String url = "jdbc:mysql://localhost:3306/videoclub";
@@ -39,8 +43,15 @@ public class LoginUsuario {
                 System.out.println("¡Inicio de sesión exitoso!");
             } else {
                 System.out.println("Usuario o contraseña incorrectos.");
+                try {
+                    Menus.menuInicial(sc);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("Ocurrió un error al regresar al menú inicial.");
+                }
             }
 
+      
             // Cerrar la conexión
             resultado.close();
             sentencia.close();

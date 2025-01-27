@@ -1,7 +1,6 @@
 package funciones;
 import java.sql.SQLException;
 import java.util.Scanner;
-
 import Repositorio.LoginUsuario;
 import Repositorio.Registrar;
 

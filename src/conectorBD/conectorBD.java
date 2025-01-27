@@ -35,5 +35,5 @@ public class conectorBD {
 			// TODO Auto-generated method stub
 			conexion.close();
 		}
-	}
+	} 
 

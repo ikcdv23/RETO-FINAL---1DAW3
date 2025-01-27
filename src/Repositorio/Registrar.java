@@ -60,14 +60,15 @@ public class Registrar {
             } else {
                 System.out.println("Hubo un error al registrar el usuario.");
             }
-
+            
             try {
                 Menus.menuInicial(sc);
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Ocurrió un error al regresar al menú inicial.");
             }
-            
+        
+
             // Cerrar la conexión
             sentencia.close();
             conexion.close();

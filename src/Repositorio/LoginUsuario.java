@@ -41,6 +41,13 @@ public class LoginUsuario {
             // Verificar si las credenciales son correctas
             if (resultado.next()) {
                 System.out.println("¡Inicio de sesión exitoso!");
+                try {
+                    Menus.menuSecundario(sc);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("Ocurrió un error al regresar al menú inicial.");
+                }
+            
             } else {
                 System.out.println("Usuario o contraseña incorrectos.");
                 try {

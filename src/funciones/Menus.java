@@ -37,16 +37,7 @@ public class Menus {
 	}
 		
 
-	public static void menuInicio() {
-		System.out.println("Bienvenido a Global cinesa aqui podra alquilar cualquier pelicula que "
-				+ "tengamos diaponible en nuestro caltalogo"
-				+ " elija una de las siguientes opciones ");
-		System.out.println("1.Consulta todas las peliculas disponibles");
-		System.out.println("2.Alquilar una pelicula");
-		
-		
-	}
-		
+
 		
 		
 	}

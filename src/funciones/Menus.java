@@ -34,12 +34,36 @@ public class Menus {
 			break;
 	
 		}
-	}
+	 }
+		public static void menuSecundario(Scanner sc) throws SQLException {
+			int opcion;
+			System.out.println("Bienvenido a Global cinesa aqui podra alquilar cualquier pelicula que "
+				+ "tengamos diaponible en nuestro caltalogo"
+				+ " elija una de las siguientes opciones ");
+		System.out.println("1. Mostrar peliculas por genero");
+		System.out.println("2. Mostrar peliculas por nombre");
+		System.out.println("3. Mostrar peliculas por precio inferior al escrito");
+		System.out.println("4. Mostrar todas las peliculas ");
+		System.out.println("5. Reserva la pelicula");
+			
+		opcion=sc.nextInt();
+		sc.nextLine();
 		
+		switch (opcion) {
+		
+			case 1:
+				ConsultarPeli.MostarPelisPorGenero();
+				break;
+			case 2:
+				PeliEsp.MostrarPeliculaPorNombre();
+				break;
+			case 3:
+				FiltrarPrecio.MostarPelisPorPrecio();
+		 }
+		
+		 }
+	
+	}	
 
-
-		
-		
-	}
 	
 

@@ -7,22 +7,22 @@ import java.util.Scanner;
 
 import conectorBD.conectorBD;
 
-public class PeliEsp {
+public class TodasPeli {
 	private  static Scanner scanner= new Scanner(System.in);
 	public static  void MostrarPeliculaPorNombre() throws SQLException {
 			 System.out.println("\n--- Mostrar Peliculas por nombre ---");
 			 System.out.print("Ingresa el genero: ");
 
 
-			 String query = "SELECT * FROM peliculas WHERE nombre = ?";
+			 String query = "SELECT * FROM peliculas";
 			 try (PreparedStatement preparedStatement =conectorBD.conexion.prepareStatement(query)) {
-			     preparedStatement.setString(1, nombre);
 			     ResultSet resultSet = preparedStatement.executeQuery();
 
 			     if (!resultSet.isBeforeFirst()) {
-			         System.out.println("No se encontro la pelicula con ese nombre: " + nombre);
+			         System.out.println("Hubo un error");
 			     } else {
 			         while (resultSet.next()) {
+			        	 System.out.println("Todas las peliculas");
 			        	 System.out.println("Nombre: " + resultSet.getString("nombre") +
 			                     ", Codigo: " + resultSet.getInt("codigo") +
 			                     ", Autor: " + resultSet.getString("autor") +

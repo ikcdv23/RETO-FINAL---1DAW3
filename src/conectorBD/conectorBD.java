@@ -9,14 +9,15 @@ import java.sql.Statement;
 
 
 public class conectorBD {	
-		private static Connection conexion;
+		public static Connection conexion;
 
 		public static void conectar() {
-
+			//Funcion que carga el driver
 			try {
 
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				System.out.println("Driver cargado");
+				//Obtener conexion con la base de datos
 				try {
 
 					conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/videoclub", "root", "1DAW3_BBDD");
@@ -30,7 +31,7 @@ public class conectorBD {
 				System.out.println("Error en el driver");
 			}
 		}
-		
+		//Metodo que cierra la conexion
 		public static void cerrarConexion() throws SQLException {
 			// TODO Auto-generated method stub
 			conexion.close();

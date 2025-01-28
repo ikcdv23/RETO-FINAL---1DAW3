@@ -6,8 +6,10 @@ import java.util.Scanner;
 import conectorBD.conectorBD;
 public class HacerReserva {
 	private  static Scanner scanner= new Scanner(System.in);
+
 	
 	public static  void realizarReserva(String nombre){
+
 			 System.out.println("\n--- Elige la pelicula que quieres reservar por el nombre ---");
 			 System.out.print("Ingresa el nombre de la pelicula");
 			 String query = "SELECT * FROM peliculas WHERE nombre = ?";

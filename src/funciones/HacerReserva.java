@@ -9,7 +9,7 @@ import conectorBD.conectorBD;
 
 public class HacerReserva {
 	private  static Scanner scanner= new Scanner(System.in);
-	public static  void MostarPelisPorPrecio(int nombre) throws SQLException {
+	public static  void HacerReserva(int nombre) throws SQLException {
 			 System.out.println("\n--- Elige la pelicula que quieres reservar por el nombre ---");
 			 System.out.print("Ingresa el nombre de la pelicula");
 
@@ -26,11 +26,10 @@ public class HacerReserva {
 			         while (resultSet.next()) {
 			        	 System.out.println("Se ha reservado correctamente la pelicula");
 			        	 System.out.println("Nombre: " + resultSet.getString("nombre"));
-			         	}
-			         }
-			     }
-			 }
-
+		   }
+	     }
+	   }
 	}
+  }
 	
 

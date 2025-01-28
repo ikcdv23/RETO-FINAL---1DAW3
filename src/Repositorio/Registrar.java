@@ -45,7 +45,9 @@ public class Registrar {
             System.out.print("Ingrese su rol: (administrador/cliente) ");
             String rol = scanner.nextLine();
             
-            
+            if(rolUsuario(Rol)) {
+            	menuUsuario;
+            }
         
 
             // Conexión a la base de datos

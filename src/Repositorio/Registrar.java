@@ -44,6 +44,9 @@ public class Registrar {
             
             System.out.print("Ingrese su rol: (administrador/cliente) ");
             String rol = scanner.nextLine();
+            
+            
+        
 
             // Conexión a la base de datos
             Connection conexion = DriverManager.getConnection(url, usuarioBD, contrasenaBD);

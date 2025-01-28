@@ -41,7 +41,6 @@ public class Menus {
 		System.out.println("3. Mostrar peliculas por precio inferior al escrito");
 		System.out.println("4. Mostrar todas las peliculas ");
 		System.out.println("5. Reserva la pelicula");
-			
 		opcion=sc.nextInt();
 		sc.nextLine();
 		
@@ -55,10 +54,15 @@ public class Menus {
 				break;
 			case 3:
 				FiltrarPrecio.MostarPelisPorPrecio((Integer) null);
+				break;
+			case 4:
+				TodasPeli.MostrarTodasPeliculas(null);
+				break;
+			case 5:
+				HacerReserva.realizarReserva(null);
+				
+				break;	
 		 }
-		
-		 
-	
 	}	
-	}
+}
 

@@ -13,6 +13,8 @@ public class Main {
 		
 		Menus.menuInicial(sc);
 		
+		Menus.menuSecundario(sc);
+		
 		conectorBD.cerrarConexion();
 		
 		sc.close();

@@ -59,7 +59,7 @@ public class Menus {
 				TodasPeli.MostrarTodasPeliculas(null);
 				break;
 			case 5:
-				HacerReserva.HacerReserva(null);
+				HacerReserva.HacerReserva();
 				break;	
 		 }
 	}	

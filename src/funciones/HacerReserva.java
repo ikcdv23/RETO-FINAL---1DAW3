@@ -9,14 +9,14 @@ import conectorBD.conectorBD;
 
 public class HacerReserva {
 	private  static Scanner scanner= new Scanner(System.in);
-	public static  void HacerReserva(int nombre) throws SQLException {
+	public static void HacerReserva(String nombre) throws SQLException {
 			 System.out.println("\n--- Elige la pelicula que quieres reservar por el nombre ---");
 			 System.out.print("Ingresa el nombre de la pelicula");
 
 
 			 String query = "SELECT * FROM peliculas WHERE nombre = ?";
 			 try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
-			     preparedStatement.setInt(1, nombre);
+			     preparedStatement.setString(1, nombre);
 			     ResultSet resultSet = preparedStatement.executeQuery();
 
 			     if (!resultSet.isBeforeFirst()) {

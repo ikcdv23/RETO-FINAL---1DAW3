@@ -15,7 +15,7 @@ public class FiltrarPrecio {
 			 
 
 
-			 String query = "SELECT * FROM peliculas WHERE precio < ?";
+			 String query = "SELECT * FROM pelicula WHERE precio < ?";
 			 try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
 			     preparedStatement.setInt(1, precio);
 			     ResultSet resultSet = preparedStatement.executeQuery();

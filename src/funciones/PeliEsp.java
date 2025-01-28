@@ -14,7 +14,7 @@ public class PeliEsp {
 			 System.out.print("Ingresa el genero: ");
 
 
-			 String query = "SELECT * FROM peliculas WHERE nombre = ?";
+			 String query = "SELECT * FROM pelicula WHERE nombre = ?";
 			 try (PreparedStatement preparedStatement =conectorBD.conexion.prepareStatement(query)) {
 			     preparedStatement.setString(1, nombre);
 			     ResultSet resultSet = preparedStatement.executeQuery();

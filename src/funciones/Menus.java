@@ -12,6 +12,7 @@ public class Menus {
 
 	public static void menuInicial(Scanner sc) throws SQLException {
 		int opcion;
+		//El menu principal que inicia sesion o registra 
 		System.out.println("1. Registrarse");
 		System.out.println("2. Iniciar sesion");
 
@@ -47,7 +48,7 @@ public class Menus {
 		switch (opcion) {
 		
 			case 1:
-				ConsultarPeli.MostarPelisPorGenero(null);
+				ConsultarPeli.MostarPelisPorGenero(String genero);
 				break;
 			case 2:
 				PeliEsp.MostrarPeliculaPorNombre(null);
@@ -59,7 +60,7 @@ public class Menus {
 				TodasPeli.MostrarTodasPeliculas(null);
 				break;
 			case 5:
-				HacerReserva.HacerReserva();
+				HacerReserva.HacerReserva(null);
 				break;	
 		 }
 	}	

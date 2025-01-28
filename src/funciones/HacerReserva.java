@@ -14,7 +14,7 @@ public class HacerReserva {
 			 System.out.print("Ingresa el nombre de la pelicula");
 
 
-			 String query = "SELECT * FROM peliculas WHERE nombre = ?";
+			 String query = "SELECT * FROM pelicula WHERE nombre = ?";
 			 try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
 			     preparedStatement.setString(1, nombre);
 			     ResultSet resultSet = preparedStatement.executeQuery();
@@ -22,13 +22,17 @@ public class HacerReserva {
 			     if (!resultSet.isBeforeFirst()) {
 			         System.out.println("No se encontraron peliculas el nombre: " + nombre);
 			     } else {
-			    	query = "INSERT INTO reservas (codigo,DNI,fecha_reserva,codigo_reserva) values(?,?,?,?,?,?)";
+			    	query = "INSERT INTO reservas (codigo,fechaReserva,fechaEntrega,dni,codigoReserva) values(?,?,?,?,?,?)";
 			         while (resultSet.next()) {
 			        	 System.out.println("Se ha reservado correctamente la pelicula");
 			        	 System.out.println("Nombre: " + resultSet.getString("nombre"));
 		   }
 	     }
 	   }
+	}
+	public static void HacerReserva(Object nombre) {
+		// TODO Auto-generated method stub
+		
 	}
   }
 	

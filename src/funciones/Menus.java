@@ -59,7 +59,7 @@ public class Menus {
 			break;
 		case 3:
 			System.out.print("Ingresa el precio");
-			 int precio=sc.nextInt();
+			 double precio=sc.nextDouble();
 			ConsultarPeli.MostarPelisPorPrecio(precio);
 			break;
 		case 4:
@@ -67,12 +67,15 @@ public class Menus {
 			break;
 		case 5:
 			
-			ConsultarPeli.MostrarTodasPeliculas(null);
+			
 			System.out.println();
 			System.out.println();
 			System.out.println("Elige el codigo de la pelicula que quieras reservar");
 			int codigo=sc.nextInt();
-			ConsultarPeli.realizarReserva(codigo);
+			sc.nextLine();
+			System.out.println("Introduce tu dni");
+			String dni=sc.nextLine();
+			ConsultarPeli.realizarReserva(codigo,dni);
 			break;
 
 		}

@@ -49,7 +49,7 @@ public class ConsultarPeli {
 			 	}
 			 }
 	
-	public static  void MostarPelisPorPrecio(int precio) throws SQLException {
+	public static  void MostarPelisPorPrecio(double precio) throws SQLException {
 			 System.out.println("\n--- Mostrar peliculas por precio inferior al introducido ---");
 			
 			 
@@ -57,7 +57,7 @@ public class ConsultarPeli {
 
 			 String query = "SELECT * FROM pelicula WHERE precio < ?";
 			 try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
-			     preparedStatement.setInt(1, precio);
+			     preparedStatement.setDouble(1, precio);
 			     ResultSet resultSet = preparedStatement.executeQuery();
 
 			     if (!resultSet.isBeforeFirst()) {
@@ -86,38 +86,48 @@ public class ConsultarPeli {
 			 
 	
 	
-	public static void realizarReserva(String codigo) {
+	public static void realizarReserva(int codigo,String dni) throws SQLException {
 
-		System.out.println("\n--- Elige la pelicula que quieres reservar por el nombre ---");
-		
+		String query = "INSERT INTO reserva (codigo,fechaReserva,fechaEntrega,dni,codigoPelicula) values(DEFAULT,DEFAULT,NULL,?,?)";
+	    // Comprobar si la película ya existe
+	        String queryCheck ="SELECT * FROM pelicula WHERE codigo = ?";
+	    try (PreparedStatement checkStmt = conectorBD.conexion.prepareStatement(queryCheck)) {
 
-		String query = "SELECT * FROM pelicula WHERE nombre = ?";
-		try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
-			preparedStatement.setString(1, codigo);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			if (!resultSet.isBeforeFirst()) {
-				System.out.println("No se encontraron peliculas el nombre: " + codigo);
-			} else {
-				query = "INSERT INTO reserva (codigo,fechaReserva,fechaEntrega,dni,codigoReserva) values(?,?,?,?,?)";
-				while (resultSet.next()) {
-					System.out.println("Se ha reservado correctamente la pelicula");
-					try {
-						System.out.println("Nombre: " + resultSet.getString("nombre"));
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			
-		}
-		
+	        checkStmt.setInt(1, codigo);
+	 
+	    
+	        ResultSet resultSet = checkStmt.executeQuery();
+	        resultSet.next();
+	        int count = resultSet.getInt(1);
+	    
+	        if (count < 0) {
+	            System.out.println("La pelicula \"" + codigo + "\" no existe en la base de datos y no se insertará nuevamente.");
+	            return; // Al devolver un return no se ejecutará el código restante y lo retoma desde el método que lo llamó
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+
+
+	    try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
+	        preparedStatement.setInt(2, codigo);
+	        preparedStatement.setString(1, dni);
+	
+
+	        preparedStatement.executeUpdate();
+	    }
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 
 	

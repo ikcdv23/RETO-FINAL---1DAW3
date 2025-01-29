@@ -76,6 +76,7 @@ public class Menus {
 			System.out.println("Introduce tu dni");
 			String dni=sc.nextLine();
 			ConsultarPeli.realizarReserva(codigo,dni);
+			ConsultarPeli.volverMenu();
 			break;
 
 		}

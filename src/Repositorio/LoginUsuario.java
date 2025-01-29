@@ -42,9 +42,6 @@ public class LoginUsuario {
             if (resultado.next()) {
                 System.out.println("¡Inicio de sesión exitoso!");
                 try {
-
-                   
-
                     Menus.menuSecundario(sc);
 
                 } catch (SQLException e) {

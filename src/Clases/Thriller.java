@@ -5,8 +5,8 @@ public class Thriller extends Pelicula{
 	
 	private String intensidad;
 	
-	public Thriller(String nombre, int codigo, String autor, double precio, int codigo_reserva, String genero) {
-		super(nombre, codigo, autor, precio, codigo_reserva, genero);
+	public Thriller(String nombre, int codigo, String autor, double precio, String genero) {
+		super(nombre, codigo, autor, precio,  genero);
 		this.intensidad=intensidad;
 	}
 

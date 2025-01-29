@@ -2,18 +2,28 @@ package Clases;
 
 public class Reserva {
 	private int codigo;
+	private int codigoPelicula;
 	private String fecha_reserva;
 	private String fecha_entrega;
 	private String Dni;
 	
-	public Reserva(int codigo, String fecha_reserva, String fecha_entrega, String dni) {
+	public Reserva(int codigo,int codigoPelicula, String fecha_reserva, String fecha_entrega, String dni) {
 		super();
 		this.codigo = codigo;
 		this.fecha_reserva = fecha_reserva;
 		this.fecha_entrega = fecha_entrega;
+		this.codigoPelicula=codigoPelicula;
 		Dni = dni;
 	}
 	
+	
+	public int getCodigoPelicula() {
+		return codigoPelicula;
+	}
+
+	public void setCodigoPelicula(int codigoPelicula) {
+		this.codigoPelicula = codigoPelicula;
+	}
 	public int getCodigo() {
 		return codigo;
 	}

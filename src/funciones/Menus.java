@@ -12,6 +12,7 @@ public class Menus {
 
 	public static void menuInicial(Scanner sc) throws SQLException {
 		int opcion;
+		// El menu principal que inicia sesion o registra
 		System.out.println("1. Registrarse");
 		System.out.println("2. Iniciar sesion");
 
@@ -30,39 +31,50 @@ public class Menus {
 
 		}
 
-	 }
-		public static void menuSecundario(Scanner sc) throws SQLException {
-			int opcion;
-			System.out.println("Bienvenido a Global cinesa aqui podra alquilar cualquier pelicula que "
-				+ "tengamos diaponible en nuestro caltalogo"
-				+ " elija una de las siguientes opciones ");
+	}
+
+	public static void menuSecundario(Scanner sc) throws SQLException {
+		int opcion;
+		System.out.println("Bienvenido a Global cinesa aqui podra alquilar cualquier pelicula que "
+				+ "tengamos diaponible en nuestro caltalogo" + " elija una de las siguientes opciones ");
 		System.out.println("1. Mostrar peliculas por genero");
 		System.out.println("2. Mostrar peliculas por nombre");
 		System.out.println("3. Mostrar peliculas por precio inferior al escrito");
 		System.out.println("4. Mostrar todas las peliculas ");
 		System.out.println("5. Reserva la pelicula");
-		opcion=sc.nextInt();
+		opcion = sc.nextInt();
 		sc.nextLine();
-		
+
 		switch (opcion) {
-		
-			case 1:
-				ConsultarPeli.MostarPelisPorGenero(null);
-				break;
-			case 2:
-				PeliEsp.MostrarPeliculaPorNombre(null);
-				break;
-			case 3:
-				FiltrarPrecio.MostarPelisPorPrecio((Integer) null);
-				break;
-			case 4:
-				TodasPeli.MostrarTodasPeliculas(null);
-				break;
-			case 5:
-				HacerReserva.realizarReserva(null);
-				break;
+		case 1:
+			 System.out.print("Ingresa el genero (thriller o accion): ");
+			 String genero=sc.nextLine();
+			ConsultarPeli.MostarPelisPorGenero(genero);
+			break;
+		case 2:
+			 System.out.println("Ingresa el nombre de pelicula que quieres buscar");
+			 String nombre=sc.nextLine();
+			ConsultarPeli.MostrarPeliculaPorNombre(nombre);
+			break;
+		case 3:
+			System.out.print("Ingresa el precio");
+			 int precio=sc.nextInt();
+			ConsultarPeli.MostarPelisPorPrecio(precio);
+			break;
+		case 4:
+			ConsultarPeli.MostrarTodasPeliculas(null);
+			break;
+		case 5:
+			
+			ConsultarPeli.MostrarTodasPeliculas(null);
+			System.out.println();
+			System.out.println();
+			System.out.println("Elige el codigo de la pelicula que quieras reservar");
+			int codigo=sc.nextInt();
+			ConsultarPeli.realizarReserva(codigo);
+			break;
 
-		 }
-	}	
+
+		}
+	}
 }
-

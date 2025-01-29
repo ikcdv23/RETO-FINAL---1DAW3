@@ -6,15 +6,14 @@ public class Pelicula {
 	protected int codigo;
 	protected String autor;
 	protected double precio;
-	protected int codigo_reserva;
 	protected String genero;
 	
-	public Pelicula(String nombre, int codigo, String autor, double precio, int codigo_reserva, String genero) {
+	public Pelicula(String nombre, int codigo, String autor, double precio, String genero) {
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.autor = autor;
 		this.precio = precio;
-		this.codigo_reserva = codigo_reserva;
+		
 		this.genero = genero;
 	}
 	
@@ -43,12 +42,6 @@ public class Pelicula {
 	}
 	public void setPrecio(double precio) {
 		this.precio = precio;
-	}
-	public int getCodigo_reserva() {
-		return codigo_reserva;
-	}
-	public void setCodigo_reserva(int codigo_reserva) {
-		this.codigo_reserva = codigo_reserva;
 	}
 	public String getGenero() {
 		return genero;

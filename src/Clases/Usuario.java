@@ -5,13 +5,15 @@ public class Usuario {
 	private String contraseña;
 	private String email;
 	private String Rol;
+	private String DNI;
 	
 	
-	public Usuario(String nombre, String contraseña, String email, String rol) {
+	public Usuario(String nombre, String contraseña, String email, String rol, String DNI) {
 		super();
 		this.nombre = nombre;
 		this.contraseña = contraseña;
 		this.email = email;
+		this.DNI=DNI;
 		Rol = rol;
 	}
 	
@@ -39,6 +41,15 @@ public class Usuario {
 	public void setRol(String rol) {
 		Rol = rol;
 	}
+
+	public String getDNI() {
+		return DNI;
+	}
+
+	public void setDNI(String dNI) {
+		DNI = dNI;
+	}
+	
 	
 	
 	

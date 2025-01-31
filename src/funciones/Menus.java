@@ -88,7 +88,7 @@ public class Menus {
 		case 6:
 			System.out.print("Ingresa el DNI");
 			 String dni2=sc.nextLine();
-			ConsultarPeli.MostarReservas(dni2, videoclub);
+			ConsultarPeli.MostrarReservas(dni2, videoclub);
 			break;
 
 

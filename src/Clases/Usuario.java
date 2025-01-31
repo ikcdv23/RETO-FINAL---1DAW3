@@ -5,7 +5,7 @@ public class Usuario {
 	private String contraseña;
 	private String email;
 	private String Rol;
-	private String DNI;
+	private String dni;
 	private String Apellido;
 	private String sexo;
 	
@@ -17,9 +17,7 @@ public class Usuario {
 		this.nombre = nombre;
 		this.contraseña = contraseña;
 		this.email = email;
-		this.DNI=DNI;
-		this.Apellido=Apellido;
-		this.sexo=sexo;
+		this.dni=dni;
 		Rol = rol;
 	}
 	
@@ -49,11 +47,11 @@ public class Usuario {
 	}
 
 	public String getDNI() {
-		return DNI;
+		return dni;
 	}
 
 	public void setDNI(String dNI) {
-		DNI = dNI;
+		dni = dNI;
 	}
 
 	public String getApellido() {

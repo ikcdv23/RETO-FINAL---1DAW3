@@ -3,7 +3,8 @@ package funciones;
 import java.sql.SQLException;
 
 import java.util.Scanner;
-
+import Repositorio.Registrar;
+import Clases.Usuario;
 import Clases.Videoclub;
 import Repositorio.LoginUsuario;
 import Repositorio.Registrar;
@@ -13,8 +14,9 @@ import conectorBD.conectorBD;
 public class Menus {
 	private static Scanner sc = new Scanner(System.in);
 
-	public static void menuInicial(Scanner sc) throws SQLException {
+	public static Usuario  menuInicial(Scanner sc) throws SQLException {
 		int opcion;
+		Videoclub videoclub=new Videoclub(null,null);
 		// El menu principal que inicia sesion o registra
 		System.out.println("1. Registrarse");
 		System.out.println("2. Iniciar sesion");
@@ -29,20 +31,28 @@ public class Menus {
 			Registrar.Registro();
 			break;
 		case 2:
-			LoginUsuario.iniciarSesion(sc);
+			Usuario usuario = LoginUsuario.iniciarSesion(sc, videoclub);
 			break;
-
+			
+		
 		}
+		Usuario usuario=new Usuario(null,null,null,null,null);
+		videoclub=new Videoclub(null,null);
+		return usuario;
+		
 
 	}
-	public static void elegirOficina() throws SQLException{
+	public static Videoclub elegirOficina(Usuario usuario) throws SQLException{
 		System.out.println("Elige la oficina (Irunnn  Gasteiz o Donosti)");
 		String loc=sc.nextLine();
 		 Videoclub videoclub=new Videoclub(loc);
-		    Menus.menuSecundario(sc, videoclub);
+		 
+		    Menus.menuSecundario(sc, videoclub,usuario);
+		    
+		    return videoclub;
 	}
 
-	public static void menuSecundario(Scanner sc, Videoclub videoclub) throws SQLException {
+	public static void menuSecundario(Scanner sc, Videoclub videoclub,Usuario usuario) throws SQLException {
 		int opcion;
 		System.out.println("Bienvenido a Global cinesa aqui podra alquilar cualquier pelicula que "
 				+ "tengamos diaponible en nuestro caltalogo" + " elija una de las siguientes opciones ");
@@ -80,9 +90,7 @@ public class Menus {
 			int codigo=sc.nextInt();
 			sc.nextLine();
 			System.out.println();
-			System.out.println("Introduce tu dni");
-			String dni=sc.nextLine();
-			ConsultarPeli.realizarReserva(codigo,dni,videoclub);
+			ConsultarPeli.realizarReserva(codigo,usuario,videoclub);
 			ConsultarPeli.volverMenu();
 			break;
 		case 6:

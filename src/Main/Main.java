@@ -1,6 +1,9 @@
 package Main;
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import Clases.Usuario;
+import Clases.Videoclub;
 import conectorBD.conectorBD;
 import funciones.Menus;
 
@@ -11,9 +14,9 @@ public class Main {
 		Scanner sc= new Scanner(System.in);
 		conectorBD.conectar();
 		
-		Menus.menuInicial(sc);
-		
-		Menus.menuSecundario(sc,null);
+		Usuario usuario = Menus.menuInicial(sc);
+		Videoclub videoclub=new Videoclub (null,null);
+		Menus.menuSecundario(sc,videoclub,usuario);
 		
 		conectorBD.cerrarConexion();
 		

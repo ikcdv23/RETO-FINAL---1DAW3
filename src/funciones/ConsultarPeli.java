@@ -3,6 +3,7 @@ package funciones;
 import java.util.Calendar;
 import java.util.Scanner;
 import Clases.Pelicula;
+import Clases.Usuario;
 import Clases.Videoclub;
 
 import java.text.SimpleDateFormat;
@@ -53,7 +54,7 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario(scanner, videoclub);
+					Menus.menuSecundario(scanner, videoclub, null);
 					break;
 			 	}
 			 }
@@ -89,14 +90,14 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario(scanner, videoclub);
+					Menus.menuSecundario(scanner, videoclub, null);
 					break;
 			 	}
 			 }
 			 
 	
 	
-	public static void realizarReserva(int codigo, String dni,Videoclub videoclub) throws SQLException {
+	public static void realizarReserva(int codigo, Usuario usuario,Videoclub videoclub) throws SQLException {
 	    // Consulta para verificar si la película existe
 	    String queryCheck = "SELECT COUNT(*) FROM pelicula WHERE codigo = ? ";
 	    String queryInsert = "INSERT INTO reserva (codigo, fechaReserva, fechaEntrega, dni, codigoPelicula) VALUES (DEFAULT, ?, ?, ?, ? )";
@@ -127,7 +128,7 @@ public class ConsultarPeli {
 	        
 	        preparedStatement.setTimestamp(1, timestampActual);
 	        preparedStatement.setTimestamp(2, timestampFuturo);
-	        preparedStatement.setString(3, dni);
+	        preparedStatement.setString(3, usuario.getDNI());
 	        preparedStatement.setInt(4, codigo);
 	        
 	        
@@ -178,7 +179,7 @@ public class ConsultarPeli {
 		 switch (opcion) {
 
 			case 1:
-				Menus.menuSecundario(scanner, videoclub);
+				Menus.menuSecundario(scanner, videoclub, null);
 				break;
 		 	}
 		 }
@@ -215,7 +216,7 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario(scanner, videoclub);
+					Menus.menuSecundario(scanner, videoclub, null);
 					break;
 			 	}
 			 }
@@ -237,7 +238,7 @@ public class ConsultarPeli {
 
 			case 1:
 			try {
-				Menus.menuSecundario(scanner, null);
+				Menus.menuSecundario(scanner, null, null);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -281,12 +282,12 @@ public class ConsultarPeli {
 	        int opcion = scanner.nextInt();
 	        scanner.nextLine(); // Consumir la nueva línea
 	        if (opcion == 1) {
-	            Menus.menuSecundario(scanner, videoclub);
+	            Menus.menuSecundario(scanner, videoclub, null);
 	        }
 	    } else {
 	        System.out.println("Opción inválida. Regresando al menú principal.");
 	        scanner.nextLine(); // Limpiar la entrada
-	        Menus.menuSecundario(scanner, videoclub);
+	        Menus.menuSecundario(scanner, videoclub, null);
 	    }
 	}
 }

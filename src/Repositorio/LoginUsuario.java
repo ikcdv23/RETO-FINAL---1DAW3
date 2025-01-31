@@ -6,12 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import Clases.Usuario;
+import Clases.Videoclub;
 import funciones.Menus;
 
 public class LoginUsuario {
 	
 	
-    public static void iniciarSesion(Scanner scanner) throws SQLException  {
+    public static Usuario iniciarSesion(Scanner scanner,Videoclub videoclub) throws SQLException  {
         // Información de conexión a la base de datos
         String url = "jdbc:mysql://localhost:3306/videoclub";
         String usuarioBD = "root";
@@ -25,7 +27,8 @@ public class LoginUsuario {
             System.out.print("Ingrese su contraseña: ");
             String contra = scanner.nextLine();
             
-            
+            Usuario usuario=new Usuario(null,null,null,null,null);
+
 
             // Conexión a la base de datos
             Connection conexion = DriverManager.getConnection(url, usuarioBD, contrasenaBD);
@@ -43,12 +46,18 @@ public class LoginUsuario {
 	            // Verificar si las credenciales son correctas
 	            if (resultado.next()) {
 	                System.out.println("¡Inicio de sesión exitoso!");
+	                String nombre= resultado.getString("nombre");
+	                String dni=resultado.getString("dni");
+	                 email=resultado.getString("email");
+	                String contraseña =resultado.getString("contraseña");
+	                String rol=resultado.getString("rol");
 	                
+	                usuario=new Usuario(nombre,dni,email,contraseña,rol);
 	                try {
 
 	                   
 
-	                    Menus.elegirOficina();
+	                videoclub= Menus.elegirOficina(usuario);
 
 	                } catch (SQLException e) {
 	                    e.printStackTrace();
@@ -70,6 +79,7 @@ public class LoginUsuario {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return usuario;
             
 
       

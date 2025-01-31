@@ -9,15 +9,15 @@ import java.util.Scanner;
 import funciones.Menus;
 
 public class LoginUsuario {
-	private  static Scanner sc= new Scanner(System.in);
 	
-    public static void iniciarSesion()  {
+	
+    public static void iniciarSesion(Scanner scanner) throws SQLException  {
         // Información de conexión a la base de datos
         String url = "jdbc:mysql://localhost:3306/videoclub";
         String usuarioBD = "root";
         String contrasenaBD = "1DAW3_BBDD";
 
-        try (Scanner scanner = new Scanner(System.in)) {
+       
             // Solicitar las credenciales al usuario
             System.out.print("Ingrese su email: ");
             String email = scanner.nextLine();
@@ -32,45 +32,51 @@ public class LoginUsuario {
 
             // Consulta SQL para verificar las credenciales
             String consulta = "SELECT * FROM usuario WHERE email = ? AND contraseña = ?";
-            PreparedStatement sentencia = conexion.prepareStatement(consulta);
-            sentencia.setString(1, email);
-            sentencia.setString(2, contra);
+            PreparedStatement sentencia;
+			try {
+				sentencia = conexion.prepareStatement(consulta);
+				sentencia.setString(1, email);
+	            sentencia.setString(2, contra);
 
-            ResultSet resultado = sentencia.executeQuery();
+	            ResultSet resultado = sentencia.executeQuery();
 
-            // Verificar si las credenciales son correctas
-            if (resultado.next()) {
-                System.out.println("¡Inicio de sesión exitoso!");
-                
-                try {
+	            // Verificar si las credenciales son correctas
+	            if (resultado.next()) {
+	                System.out.println("¡Inicio de sesión exitoso!");
+	                
+	                try {
 
-                   
+	                   
 
-                    Menus.menuSecundario(sc);
+	                    Menus.elegirOficina();
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    System.out.println("Ocurrió un error al regresar al menú inicial.");
-                }
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                    System.out.println("Ocurrió un error al regresar al menú inicial.");
+	                }
+	                resultado.close();
+	                sentencia.close();
+	                conexion.close();
+	            } else {
+	                System.out.println("Usuario o contraseña incorrectos.");
+	                try {
+	                    Menus.menuInicial(scanner);
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                    System.out.println("Ocurrió un error al regresar al menú inicial.");
+	                }
+	            }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             
-            } else {
-                System.out.println("Usuario o contraseña incorrectos.");
-                try {
-                    Menus.menuInicial(sc);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    System.out.println("Ocurrió un error al regresar al menú inicial.");
-                }
-            }
 
       
             // Cerrar la conexión
-            resultado.close();
-            sentencia.close();
-            conexion.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            
+            
+        
     }
 }
 

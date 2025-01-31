@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import Clases.Usuario;
 import funciones.Menus;
 
 public class Registrar {
@@ -44,7 +45,8 @@ public class Registrar {
 
 			System.out.print("Ingrese su rol: (administrador/cliente) ");
 			String rol = scanner.nextLine();
-
+			
+			Usuario usuario=new Usuario(nombre,dni,email,contra,rol);
 			// Conexión a la base de datos
 			Connection conexion = DriverManager.getConnection(url, usuarioBD, contrasenaBD);
 

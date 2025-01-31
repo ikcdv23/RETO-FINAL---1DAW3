@@ -13,7 +13,6 @@ public class Pelicula {
 		this.codigo = codigo;
 		this.autor = autor;
 		this.precio = precio;
-		
 		this.genero = genero;
 	}
 	

@@ -56,7 +56,6 @@ public class Menus {
 		sc.nextLine();
 
 		switch (opcion) {
-
 		case 1:
 			 System.out.print("Ingresa el genero (thriller o accion): ");
 			 String genero=sc.nextLine();
@@ -91,6 +90,7 @@ public class Menus {
 			 String dni2=sc.nextLine();
 			ConsultarPeli.MostarReservas(dni2, videoclub);
 			break;
+
 
 		}
 	}

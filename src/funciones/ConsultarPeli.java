@@ -183,4 +183,38 @@ public class ConsultarPeli {
 		}
 	}
 
-}
+	public static  void MostrarReservas(String dni,Videoclub videoclub) throws SQLException {
+		 System.out.println("\n--- Mostrar Todas Las Reservas ---");
+		 //Hace la consulta para filtrar las pelis por genero
+		 String query = "SELECT * FROM reserva WHERE dni = ?";
+		 try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
+		     preparedStatement.setString(1, dni);
+		     ResultSet resultSet = preparedStatement.executeQuery();
+		     //Si no se  se encuentra el genero muestra el mensaje
+		     if (!resultSet.isBeforeFirst()) {
+		         System.out.println("No se encontro ese dni: " + dni);
+		     }
+		     else {
+		     System.out.println("Todas las reservas");
+	   	 System.out.println("Fecha Reserva: " + resultSet.getString("fechaReserva") +
+	                ", Codigo: " + resultSet.getInt("codigo") +
+	                ", DNI: " + resultSet.getString("dni") +
+	                ", Codigo Pelicula: " + resultSet.getInt("codigoPelicula"));
+	               
+		     }
+		    
+		 		System.out.println("1. volver al menu principal");
+		 		 int opcion=scanner.nextInt();
+		 		 switch (opcion) {
+		 			case 1:
+		 			try {
+		 				Menus.menuSecundario(scanner, videoclub);
+		 			} catch (SQLException e) {
+		 				// TODO Auto-generated catch block
+		 				e.printStackTrace();
+		 			}
+		 				break;
+		 		 }               
+		 	}
+		}
+	}

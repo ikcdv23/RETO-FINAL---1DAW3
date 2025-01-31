@@ -36,7 +36,7 @@ public class Menus {
 
 	}
 	public static void elegirOficina() throws SQLException{
-		System.out.println("Elige la oficina (Irunnn  Gasteiz o Donosti)");
+		System.out.println("Elige la oficina (Irun/Gasteiz/Donosti)");
 		String loc=sc.nextLine();
 		 Videoclub videoclub=new Videoclub(loc);
 		    Menus.menuSecundario(sc, videoclub);
@@ -83,12 +83,11 @@ public class Menus {
 			System.out.println("Introduce tu dni");
 			String dni=sc.nextLine();
 			ConsultarPeli.realizarReserva(codigo,dni,videoclub);
-			ConsultarPeli.volverMenu();
 			break;
 		case 6:
 			System.out.print("Ingresa el DNI");
 			 String dni2=sc.nextLine();
-			ConsultarPeli.MostarReservas(dni2, videoclub);
+			ConsultarPeli.MostrarReservas(dni2, videoclub);
 			break;
 
 

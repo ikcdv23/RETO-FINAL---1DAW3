@@ -35,12 +35,7 @@ public class Menus {
 		}
 
 	}
-	public static void elegirOficina() throws SQLException{
-		System.out.println("Elige la oficina (Irun/Gasteiz/Donosti)");
-		String loc=sc.nextLine();
-		 Videoclub videoclub=new Videoclub(loc);
-		    Menus.menuSecundario(sc, videoclub);
-	}
+	
 
 	public static void menuSecundario(Scanner sc, Videoclub videoclub) throws SQLException {
 		int opcion;

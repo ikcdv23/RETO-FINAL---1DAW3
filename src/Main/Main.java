@@ -1,4 +1,5 @@
 package Main;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -8,19 +9,28 @@ import conectorBD.conectorBD;
 import funciones.Menus;
 
 public class Main {
+    public static void main(String[] args) throws SQLException {
+        Scanner sc = new Scanner(System.in);
 
-	public static void main(String[] args) throws SQLException {
-		// TODO Auto-generated method stub
-		Scanner sc= new Scanner(System.in);
-		conectorBD.conectar();
-		
-		Usuario usuario = Menus.menuInicial(sc);
-		Videoclub videoclub=new Videoclub (null,null);
-		Menus.menuSecundario(sc,videoclub,usuario);
-		
-		conectorBD.cerrarConexion();
-		
-		sc.close();
-		
-	}
+        try {
+            conectorBD.conectar();
+            
+            // Iniciar sesión o registrarse
+            Usuario usuario = Menus.menuInicial();
+
+            // Elegir la oficina antes de acceder al menú secundario
+            Videoclub videoclub = Menus.elegirOficina(usuario);
+
+            // Menú de opciones
+            Menus.menuSecundario(videoclub, usuario);
+
+        } catch (SQLException e) {
+            System.err.println("Error en la base de datos: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Cerrar conexión y scanner
+            conectorBD.cerrarConexion();
+            sc.close();
+        }
+    }
 }

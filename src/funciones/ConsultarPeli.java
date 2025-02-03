@@ -54,7 +54,7 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario(scanner, videoclub, null);
+					Menus.menuSecundario( videoclub, null);
 					break;
 			 	}
 			 }
@@ -90,7 +90,7 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario(scanner, videoclub, null);
+					Menus.menuSecundario( videoclub, null);
 					break;
 			 	}
 			 }
@@ -179,7 +179,7 @@ public class ConsultarPeli {
 		 switch (opcion) {
 
 			case 1:
-				Menus.menuSecundario(scanner, videoclub, null);
+				Menus.menuSecundario( videoclub, null);
 				break;
 		 	}
 		 }
@@ -216,7 +216,7 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario(scanner, videoclub, null);
+					Menus.menuSecundario( videoclub, null);
 					break;
 			 	}
 			 }
@@ -238,7 +238,7 @@ public class ConsultarPeli {
 
 			case 1:
 			try {
-				Menus.menuSecundario(scanner, null, null);
+				Menus.menuSecundario(null, null);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -248,19 +248,18 @@ public class ConsultarPeli {
 		 }
 
 
-	public static void MostrarReservas(String dni, Videoclub videoclub) throws SQLException {
+	public static void MostrarReservas(Usuario usuario, Videoclub videoclub) throws SQLException {
 	    System.out.println("\n--- Mostrar Todas Las Reservas ---");
 	    
 	    // Consulta para filtrar las reservas por DNI
-	    String query = "SELECT * FROM reserva WHERE dni = ?";
+	    String query = "SELECT * FROM reserva ";
 	    
 	    try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
-	        preparedStatement.setString(1, dni);
 	        ResultSet resultSet = preparedStatement.executeQuery();
 	        
 	        // Verifica si hay resultados
 	        if (!resultSet.isBeforeFirst()) {
-	            System.out.println("No se encontró ninguna reserva para el DNI: " + dni);
+	            System.out.println("No se encontró ninguna reserva para el DNI: " + usuario);
 	        } else {
 	            System.out.println("Todas las reservas:");
 	            while (resultSet.next()) { // Iterar sobre los resultados
@@ -282,12 +281,12 @@ public class ConsultarPeli {
 	        int opcion = scanner.nextInt();
 	        scanner.nextLine(); // Consumir la nueva línea
 	        if (opcion == 1) {
-	            Menus.menuSecundario(scanner, videoclub, null);
+	            Menus.menuSecundario( videoclub, null);
 	        }
 	    } else {
 	        System.out.println("Opción inválida. Regresando al menú principal.");
 	        scanner.nextLine(); // Limpiar la entrada
-	        Menus.menuSecundario(scanner, videoclub, null);
+	        Menus.menuSecundario( videoclub, null);
 	    }
 	}
 }

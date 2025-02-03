@@ -68,7 +68,7 @@ public class Registrar {
 			}
 
 			try {
-				Menus.menuInicial(sc);
+				Menus.menuInicial();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("Ocurrió un error al regresar al menú inicial.");

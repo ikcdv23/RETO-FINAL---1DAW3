@@ -69,7 +69,7 @@ public class LoginUsuario {
 	            } else {
 	                System.out.println("Usuario o contraseña incorrectos.");
 	                try {
-	                    Menus.menuInicial(scanner);
+	                    Menus.menuInicial();
 	                } catch (SQLException e) {
 	                    e.printStackTrace();
 	                    System.out.println("Ocurrió un error al regresar al menú inicial.");

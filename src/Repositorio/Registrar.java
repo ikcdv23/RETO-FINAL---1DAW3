@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import Clases.Usuario;
+import conectorBD.conectorBD;
 import funciones.Menus;
 
 public class Registrar {
@@ -24,13 +25,20 @@ public class Registrar {
 			System.out.print("Ingrese un nombre de usuario: ");
 			String nombre = scanner.nextLine();
 
-			String dni;
+			
 			while (true) {
-				System.out.print("Ingrese tu DNI: ");
-				dni = scanner.nextLine();
+				
+				
+				// Uso en el código
+				System.out.println("Introduce tu DNI:");
+				String dni = scanner.nextLine().trim();
+				while (!validarDNI(dni)) {
+				    System.out.println("Error: El DNI debe tener 9 caracteres y el formato debe ser correcto (8 dígitos seguidos de una letra). Vuelve a introducirlo:");
+				    dni = scanner.nextLine().trim();
+				}
 
 				// Verificar si el DNI ya existe
-				if (verificarDni(dni, url, usuarioBD, contrasenaBD)) {
+				if (verificarDni(dni)) {
 					System.out.println("El DNI ya esta registrado. Por favor, introduce otro.");
 				} else {
 					break; // Salir del bucle si el DNI no existe
@@ -42,11 +50,13 @@ public class Registrar {
 
 			System.out.print("Ingrese una contraseña: ");
 			String contra = scanner.nextLine();
-
-			System.out.print("Ingrese su rol: (administrador/cliente) ");
-			String rol = scanner.nextLine();
 			
-			Usuario usuario=new Usuario(nombre,dni,email,contra,rol);
+			String rol1 = elegirRol();
+			
+			
+			
+			String dni ="";
+			Usuario usuario=new Usuario(nombre,dni,email,contra,rol1);
 			// Conexión a la base de datos
 			Connection conexion = DriverManager.getConnection(url, usuarioBD, contrasenaBD);
 
@@ -57,7 +67,7 @@ public class Registrar {
 			sentencia.setString(2, dni);
 			sentencia.setString(3, email);
 			sentencia.setString(4, contra);
-			sentencia.setString(5, rol);
+			sentencia.setString(5, rol1);
 
 			// Ejecutar la inserción
 			int filasAfectadas = sentencia.executeUpdate();
@@ -83,31 +93,51 @@ public class Registrar {
 
 	}
 
+
+
 	// Método para verificar si el DNI ya existe en la base de datos
-	public static boolean verificarDni(String dni, String url, String usuarioBD, String contrasenaBD) {
+	
+	public static String elegirRol() {
+	    String rol;
+	    do {
+	        System.out.println("Elige tu rol (Administrador / Cliente): ");
+	        rol = sc.nextLine().trim();
+	        if (!rol.equalsIgnoreCase("Administrador") && !rol.equalsIgnoreCase("Cliente")) {
+	            System.out.println("Error: El rol debe ser 'Administrador' o 'Cliente'. Vuelve a intentarlo.");
+	        }
+	    } while (!rol.equalsIgnoreCase("Administrador") && !rol.equalsIgnoreCase("Cliente"));
+	   
+	    return rol;
+	}
+	public static boolean validarDNI(String dni) {
+	    // Verifica si el DNI tiene exactamente 9 caracteres y es válido
+	    return dni.length() == 9 && dni.matches("[0-9]{8}[A-Za-z]");
+	}
+	
+	// Método para verificar si el DNI ya existe en la base de datos
+	public static boolean verificarDni(String dni) {
 		boolean existe = false;
 		try {
 			// Conexión a la base de datos
-			Connection conexion = DriverManager.getConnection(url, usuarioBD, contrasenaBD);
-
+		
 			// Consulta SQL para verificar el DNI
 			String consulta = "SELECT COUNT(*) FROM usuario WHERE dni = ?";
-			PreparedStatement sentencia = conexion.prepareStatement(consulta);
+			
+			PreparedStatement sentencia =conectorBD.conexion.prepareStatement(consulta);
 			sentencia.setString(1, dni);
-
 			// Ejecutar la consulta
 			ResultSet resultado = sentencia.executeQuery();
 			if (resultado.next()) {
 				existe = resultado.getInt(1) > 0; // Si el conteo es mayor a 0, el DNI ya existe
 			}
-
 			// Cerrar la conexión
 			resultado.close();
 			sentencia.close();
-			conexion.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return existe;
 	}
+
 }

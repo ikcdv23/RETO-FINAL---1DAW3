@@ -10,9 +10,7 @@ public class Videoclub {
 		
 	}
 	
-	public Videoclub(Object object, String loc) {
-		// TODO Auto-generated constructor stub
-	}
+
 
 	public String getLocalidad() {
 		return Localidad;

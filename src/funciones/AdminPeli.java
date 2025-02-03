@@ -26,10 +26,10 @@ public class AdminPeli {
 	        } else {
 	            System.out.println("Todas las reservas:");
 	            while (resultSet.next()) { // Iterar sobre los resultados
-	                System.out.println("Fecha Reserva: " + resultSet.getString("fechaReserva") +
-	                        ", Código: " + resultSet.getInt("codigo") +
-	                        ", DNI: " + resultSet.getString("dni") +
-	                        ", Código Película: " + resultSet.getInt("codigoPelicula"));
+	                System.out.println(", Código: " + resultSet.getInt("count(codigo)") 
+	                        
+	                        
+	                    );
 	            }
 	        }
 	    } catch (SQLException e) {
@@ -44,36 +44,36 @@ public class AdminPeli {
 	        int opcion = scanner.nextInt();
 	        scanner.nextLine(); // Consumir la nueva línea
 	        if (opcion == 1) {
-	            Menus.menuSecundario( videoclub, null);
+	            Menus.menuAdministrador(null, videoclub);
 	        }
 	    } else {
 	        System.out.println("Opción inválida. Regresando al menú principal.");
 	        scanner.nextLine(); // Limpiar la entrada
-	        Menus.menuSecundario( videoclub, null);
+	        Menus.menuAdministrador( null, videoclub);
 	    }
 	}
 
 
 
-	public static void ContarReservasLoc(Usuario usuario, Videoclub videoclub) throws SQLException {
-	    System.out.println("\n--- Contar Todas Las Reservas ---");
+	public static void ContarReservasLoc(Usuario usuario, String loc) throws SQLException {
+	    System.out.println("\n--- Contar Todas Las Reservas Por Localidad ---");
 	    
 	    // Consulta para filtrar las reservas por DNI
-	    String query = "SELECT count(codigo) FROM reserva where localidad = ?";
+	    String query = "SELECT p.nombre, v.localidad, p.codigo, p.autor, p.precio, p.genero from pelicula p join guardar g on p.codigo=g.codPeli join videoclub v on g.nif=v.nif  localidad = ?";;;
 	    
 	    try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
 	        ResultSet resultSet = preparedStatement.executeQuery();
 	        
+	        preparedStatement.setString(1, loc);
+	        
 	        // Verifica si hay resultados
 	        if (!resultSet.isBeforeFirst()) {
-	            System.out.println("No se encontró ninguna reserva para el DNI: " + usuario);
+	            System.out.println("No se encontró ninguna reserva para la localidad: " + loc);
 	        } else {
 	            System.out.println("Todas las reservas:");
 	            while (resultSet.next()) { // Iterar sobre los resultados
-	                System.out.println("Fecha Reserva: " + resultSet.getString("fechaReserva") +
-	                        ", Código: " + resultSet.getInt("codigo") +
-	                        ", DNI: " + resultSet.getString("dni") +
-	                        ", Código Película: " + resultSet.getInt("codigoPelicula"));
+	            	System.out.println(", Código: " + resultSet.getInt("count(codigo)"));
+	               
 	            }
 	        }
 	    } catch (SQLException e) {
@@ -88,17 +88,17 @@ public class AdminPeli {
 	        int opcion = scanner.nextInt();
 	        scanner.nextLine(); // Consumir la nueva línea
 	        if (opcion == 1) {
-	            Menus.menuSecundario( videoclub, null);
+	            Menus.menuAdministrador( null, null);
 	        }
 	    } else {
 	        System.out.println("Opción inválida. Regresando al menú principal.");
 	        scanner.nextLine(); // Limpiar la entrada
-	        Menus.menuSecundario( videoclub, null);
+	        Menus.menuAdministrador( null, null);
 	    }
 	}
 
 	
-public static void ContarUsuarios(Usuario usuario, Videoclub videoclub) throws SQLException {
+public static void ContarUsuarios(Usuario usuario) throws SQLException {
     System.out.println("\n--- Contar Todos Los Usuarios ---");
     
     // Consulta para filtrar las reservas por DNI
@@ -131,16 +131,16 @@ public static void ContarUsuarios(Usuario usuario, Videoclub videoclub) throws S
         int opcion = scanner.nextInt();
         scanner.nextLine(); // Consumir la nueva línea
         if (opcion == 1) {
-            Menus.menuSecundario( videoclub, null);
+            Menus.menuAdministrador(null, null);
         }
     } else {
         System.out.println("Opción inválida. Regresando al menú principal.");
         scanner.nextLine(); // Limpiar la entrada
-        Menus.menuSecundario( videoclub, null);
+        Menus.menuAdministrador( null, null);
     }
 }
 
-public static void PrecioTotal(Usuario usuario, Videoclub videoclub) throws SQLException {
+public static void PrecioTotal(Usuario usuario) throws SQLException {
     System.out.println("\n--- Contar Todos Los Usuarios ---");
     
     // Consulta para filtrar las reservas por DNI
@@ -173,12 +173,12 @@ public static void PrecioTotal(Usuario usuario, Videoclub videoclub) throws SQLE
         int opcion = scanner.nextInt();
         scanner.nextLine(); // Consumir la nueva línea
         if (opcion == 1) {
-            Menus.menuSecundario( videoclub, null);
+            Menus.menuAdministrador (null, null);
         }
     } else {
         System.out.println("Opción inválida. Regresando al menú principal.");
         scanner.nextLine(); // Limpiar la entrada
-        Menus.menuSecundario( videoclub, null);
+        Menus.menuAdministrador( null, null);
     }
 }
 }

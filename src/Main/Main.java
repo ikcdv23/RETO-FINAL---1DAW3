@@ -22,7 +22,9 @@ public class Main {
             Videoclub videoclub = Menus.elegirOficina(usuario);
 
             // Menú de opciones
-            Menus.menuSecundario(videoclub, usuario);
+            Menus.menuSecundario(sc,videoclub, usuario);
+            
+            Menus.menuAdministrador(usuario,videoclub);
 
         } catch (SQLException e) {
             System.err.println("Error en la base de datos: " + e.getMessage());

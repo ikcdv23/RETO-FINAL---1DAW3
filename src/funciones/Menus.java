@@ -1,7 +1,14 @@
 package funciones;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
+
 import funciones.AdminPeli;
 import Clases.Usuario;
 import Clases.Videoclub;
@@ -23,21 +30,47 @@ public class Menus {
             Registrar.Registro();
             return new Usuario(null,"", null, null, null);
         } else {
-            Videoclub videoclub = new Videoclub(null, null);
+            Videoclub videoclub = new Videoclub(null);
             return LoginUsuario.iniciarSesion(sc, videoclub);
         }
     }
 
-    public static Videoclub elegirOficina(Usuario usuario) throws SQLException {
-        System.out.println("Elige la oficina (Irun, Gasteiz o Donosti):");
-        String loc = sc.nextLine().trim();
-        
-        Videoclub videoclub = new Videoclub(loc);
-        menuSecundario(videoclub, usuario);
-        return videoclub;
-    }
+  
 
-    public static void menuSecundario(Videoclub videoclub, Usuario usuario) throws SQLException {
+        public static Videoclub elegirOficina(Usuario usuario) throws SQLException {
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            Videoclub videoclub=null;
+            try {
+                conn = conectorBD.conexion;
+                String query = "SELECT DISTINCT localidad FROM videoclub";
+                stmt = conn.prepareStatement(query);
+                rs = stmt.executeQuery();
+                Set<String> localidadesDisponibles = new HashSet<>();
+                while (rs.next()) {
+                    localidadesDisponibles.add(rs.getString("localidad").toLowerCase());
+                }
+                String loc;
+                do {
+                    System.out.println("Elige la oficina (Irun / Donosti / Gasteiz): ");
+                    loc = sc.nextLine().trim().toLowerCase();
+                    if (!localidadesDisponibles.contains(loc)) {
+                        System.out.println("Ubicación no válida. Por favor, elige entre Irun, Donosti o Gasteiz.");
+                    }
+                } while (!localidadesDisponibles.contains(loc));
+                 videoclub = new Videoclub(loc);
+                System.out.println("Has seleccionado la oficina de: " + loc);
+                Menus.menuSecundario(sc, videoclub, usuario);  // ✅ Se pasa el usuario ya autenticado
+            } finally {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            }
+            return videoclub;
+        }
+
+    public static void menuSecundario(Scanner sc,Videoclub videoclub, Usuario usuario) throws SQLException {
     	
         while (true) {
             System.out.println("\nBienvenido a Global Cinesa. Elija una opción:");
@@ -72,8 +105,12 @@ public class Menus {
                 case 5:
                     System.out.print("Ingrese el código de la película: ");
                     int codigo = sc.nextInt();
-                    sc.nextLine(); 
-                    ConsultarPeli.realizarReserva(codigo, usuario, videoclub);
+                    System.out.println("Ingrese que dia quieres iniciar el alquiler");
+                    String fechain = sc.next();
+                    System.out.println("Ingrese la fecha en la que va a acabar el alquiler");
+                    String fechaout = sc.next();
+                    sc.nextLine();
+                    ConsultarPeli.realizarReserva(codigo, usuario, videoclub, fechain, fechaout);
                     ConsultarPeli.volverMenu();
                     break;
                 case 6:
@@ -85,7 +122,7 @@ public class Menus {
             }
         }
     }
-    public static void menuAdministrador(Videoclub videoclub, Usuario usuario) throws SQLException {
+    public static void menuAdministrador(Usuario usuario,Videoclub videoclub) throws SQLException {
     	while (true) {
     	System.out.println("---------Has iniciado sesion como administrador--------");
     	System.out.println("1.Cantidad de reservas");
@@ -97,17 +134,17 @@ public class Menus {
 
         switch (opcion) {
             case 1:
-                AdminPeli.ContarReservas(usuario, videoclub);
+                AdminPeli.ContarReservas(usuario,videoclub);
                 break;
             case 2:
-               
-            	AdminPeli.ContarReservasLoc(usuario, videoclub);
+               String loc=sc.nextLine();                                      
+            	AdminPeli.ContarReservasLoc(usuario, loc);
                 break;
             case 3:
-            	AdminPeli.ContarUsuarios(usuario, videoclub);
+            	AdminPeli.ContarUsuarios(usuario);
                 break;
             case 4:
-            	AdminPeli.PrecioTotal(usuario, videoclub);
+            	AdminPeli.PrecioTotal(usuario);
                 break;
         	}
     	}

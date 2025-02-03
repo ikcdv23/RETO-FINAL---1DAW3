@@ -54,7 +54,7 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario( videoclub, null);
+					Menus.menuSecundario( scanner, videoclub, null);
 					break;
 			 	}
 			 }
@@ -90,68 +90,60 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario( videoclub,null);
+					Menus.menuSecundario( scanner, videoclub,null);
 					break;
 			 	}
 			 }
 			 
 	
 	
-	public static void realizarReserva(int codigo, Usuario usuario,Videoclub videoclub) throws SQLException {
-	    // Consulta para verificar si la película existe
-	    String queryCheck = "SELECT COUNT(*) FROM pelicula WHERE codigo = ? ";
-	    String queryInsert = "INSERT INTO reserva (codigo, fechaReserva, fechaEntrega, dni, codigoPelicula) VALUES (DEFAULT, ?, ?, ?, ? )";
+	public static void realizarReserva(int codigo, Usuario usuario,Videoclub videoclub, String fechain, String fechaout) throws SQLException {
+        // Consulta para verificar si la película existe
+        String queryCheck = "SELECT COUNT(*) FROM pelicula WHERE codigo = ?;";
+        String queryInsert = "INSERT INTO reserva (codigo, fechaReserva, fechaEntrega, dni, codigoPelicula) VALUES (DEFAULT, ?, ?, ?, ? )";
 
-	    try (PreparedStatement checkStmt = conectorBD.conexion.prepareStatement(queryCheck)) {
-	        checkStmt.setInt(1, codigo);
-	        
-	        try (ResultSet resultSet = checkStmt.executeQuery()) {
-	        	 if (!resultSet.isBeforeFirst()) {
-	    	         System.out.println("No se encontraron películas para el codigo: " + codigo);
-	        	 }
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        throw e; // Re-lanzamos la excepción para que el llamador pueda manejarla
-	    }
+        try (PreparedStatement checkStmt = conectorBD.conexion.prepareStatement(queryCheck)) {
+            checkStmt.setInt(1, codigo);
+            
+            try (ResultSet resultSet = checkStmt.executeQuery()) {
+                 if (!resultSet.isBeforeFirst()) {
+                     System.out.println("No se encontraron películas para el codigo: " + codigo);
+                 }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; // Re-lanzamos la excepción para que el llamador pueda manejarla
+        }
 
-	    // Insertar la reserva si la película existe
-	    try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(queryInsert)) {
-	    	Timestamp timestampActual = new Timestamp(System.currentTimeMillis());
-	        
-	    	Calendar calendar = Calendar.getInstance();
-	        calendar.setTimeInMillis(timestampActual.getTime());
-	        calendar.add(Calendar.DAY_OF_MONTH, 15);
-	        
-	        Timestamp timestampFuturo = new Timestamp(calendar.getTimeInMillis());
-	        
-	        
-	        preparedStatement.setTimestamp(1, timestampActual);
-	        preparedStatement.setTimestamp(2, timestampFuturo);
-	        preparedStatement.setString(3, usuario.getDNI());
-	        preparedStatement.setInt(4, codigo);
-	        
-	        
-	        int filasAfectadas = preparedStatement.executeUpdate();
-	        if (filasAfectadas > 0) {
-	            System.out.println("Reserva realizada con éxito.");
-	        } else {
-	            System.out.println("No se pudo realizar la reserva.");
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        throw e;
-	    }
-	    
-		 System.out.println("1. volver al menu principal");
-		 int opcion=scanner.nextInt();
-		 switch (opcion) {
+        // Insertar la reserva si la película existe
+        try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(queryInsert)) {
+        
+            preparedStatement.setString(1, fechain);
+            preparedStatement.setString(2, fechaout);
+            preparedStatement.setString(3, usuario.getDNI());
+            preparedStatement.setInt(4, codigo);
+            
+            
+            int filasAfectadas = preparedStatement.executeUpdate();
+            if (filasAfectadas > 0) {
+                System.out.println("Reserva realizada con éxito.");
+            } else {
+                System.out.println("No se pudo realizar la reserva.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        
+         System.out.println("1. volver al menu principal");
+         int opcion=scanner.nextInt();
+         switch (opcion) {
 
-			case 1:
-				Menus.menuSecundario( videoclub,usuario);
-				break;
-		 	}
-		 }
+            case 1:
+                Menus.menuSecundario( scanner, videoclub,usuario);
+                break;
+             }
+         }
 	
 	
 	
@@ -189,7 +181,7 @@ public class ConsultarPeli {
 		 switch (opcion) {
 
 			case 1:
-				Menus.menuSecundario( videoclub, null);
+				Menus.menuSecundario( scanner, videoclub, null);
 				break;
 		 	}
 		 }
@@ -226,10 +218,11 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario( videoclub, null);
+					Menus.menuSecundario(scanner, videoclub, null);
 					break;
 			 	}
 			 }
+	
 	
 	
 	
@@ -248,7 +241,7 @@ public class ConsultarPeli {
 
 			case 1:
 			try {
-				Menus.menuSecundario(null, null);
+				Menus.menuSecundario(null, null, null);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -291,12 +284,12 @@ public class ConsultarPeli {
 	        int opcion = scanner.nextInt();
 	        scanner.nextLine(); // Consumir la nueva línea
 	        if (opcion == 1) {
-	            Menus.menuSecundario( videoclub, null);
+	            Menus.menuSecundario(scanner, videoclub, usuario);
 	        }
 	    } else {
 	        System.out.println("Opción inválida. Regresando al menú principal.");
 	        scanner.nextLine(); // Limpiar la entrada
-	        Menus.menuSecundario( videoclub, null);
+	        Menus.menuSecundario( scanner, videoclub, null);
 	    }
 	}
 }

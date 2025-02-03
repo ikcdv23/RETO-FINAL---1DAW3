@@ -2,7 +2,7 @@ package funciones;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-
+import funciones.AdminPeli;
 import Clases.Usuario;
 import Clases.Videoclub;
 import Repositorio.LoginUsuario;
@@ -38,6 +38,7 @@ public class Menus {
     }
 
     public static void menuSecundario(Videoclub videoclub, Usuario usuario) throws SQLException {
+    	
         while (true) {
             System.out.println("\nBienvenido a Global Cinesa. Elija una opción:");
             System.out.println("1. Mostrar películas por género");
@@ -83,6 +84,33 @@ public class Menus {
                     return;
             }
         }
+    }
+    public static void menuAdministrador(Videoclub videoclub, Usuario usuario) throws SQLException {
+    	while (true) {
+    	System.out.println("---------Has iniciado sesion como administrador--------");
+    	System.out.println("1.Cantidad de reservas");
+    	System.out.println("2.Cuantas reservas por localizacion");
+    	System.out.println("3.Cantidad de usuarios");
+    	System.out.println("4.El dinero ganado en total");
+    	
+    	int opcion = obtenerOpcion(1, 7);
+
+        switch (opcion) {
+            case 1:
+                AdminPeli.ContarReservas(usuario, videoclub);
+                break;
+            case 2:
+               
+            	AdminPeli.ContarReservasLoc(usuario, videoclub);
+                break;
+            case 3:
+            	AdminPeli.ContarUsuarios(usuario, videoclub);
+                break;
+            case 4:
+            	AdminPeli.PrecioTotal(usuario, videoclub);
+                break;
+        	}
+    	}
     }
 
     private static int obtenerOpcion(int min, int max) {

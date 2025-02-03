@@ -90,7 +90,7 @@ public class ConsultarPeli {
 			 switch (opcion) {
 
 				case 1:
-					Menus.menuSecundario( videoclub, null);
+					Menus.menuSecundario( videoclub,null);
 					break;
 			 	}
 			 }
@@ -142,7 +142,17 @@ public class ConsultarPeli {
 	        e.printStackTrace();
 	        throw e;
 	    }
-	}
+	    
+		 System.out.println("1. volver al menu principal");
+		 int opcion=scanner.nextInt();
+		 switch (opcion) {
+
+			case 1:
+				Menus.menuSecundario( videoclub,usuario);
+				break;
+		 	}
+		 }
+	
 	
 	
 	

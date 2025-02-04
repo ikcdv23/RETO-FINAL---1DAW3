@@ -59,12 +59,14 @@ public class AdminPeli {
 	    System.out.println("\n--- Contar Todas Las Reservas Por Localidad ---");
 	    
 	    // Consulta para filtrar las reservas por DNI
-	    String query = "SELECT p.nombre, v.localidad, p.codigo, p.autor, p.precio, p.genero from pelicula p join guardar g on p.codigo=g.codPeli join videoclub v on g.nif=v.nif  localidad = ?";;;
+	    String query="SELECT count(codigo), localidad from reserva p join guardar g on p.codigoPelicula=g.codPeli join videoclub v on g.nif=v.nif where localidad= ?";
 	    
 	    try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
+	    	preparedStatement.setString(1, loc);
+	    	
 	        ResultSet resultSet = preparedStatement.executeQuery();
 	        
-	        preparedStatement.setString(1, loc);
+	        
 	        
 	        // Verifica si hay resultados
 	        if (!resultSet.isBeforeFirst()) {
@@ -72,7 +74,7 @@ public class AdminPeli {
 	        } else {
 	            System.out.println("Todas las reservas:");
 	            while (resultSet.next()) { // Iterar sobre los resultados
-	            	System.out.println(", Código: " + resultSet.getInt("count(codigo)"));
+	            	System.out.println("Código: " + resultSet.getInt("count(codigo)"));
 	               
 	            }
 	        }
@@ -155,10 +157,8 @@ public static void PrecioTotal(Usuario usuario) throws SQLException {
         } else {
             System.out.println("Todas las reservas:");
             while (resultSet.next()) { // Iterar sobre los resultados
-                System.out.println("Fecha Reserva: " + resultSet.getString("fechaReserva") +
-                        ", Código: " + resultSet.getInt("codigo") +
-                        ", DNI: " + resultSet.getString("dni") +
-                        ", Código Película: " + resultSet.getInt("codigoPelicula"));
+                System.out.println("Precio Total: " + resultSet.getString("sum(precio)"));
+                        
             }
         }
     } catch (SQLException e) {

@@ -137,7 +137,8 @@ public class Menus {
                 AdminPeli.ContarReservas(usuario,videoclub);
                 break;
             case 2:
-               String loc=sc.nextLine();                                      
+            	System.out.println("Ingresa una localidad (Irun/Gasteiz/Donosti)");
+               String loc=sc.nextLine();
             	AdminPeli.ContarReservasLoc(usuario, loc);
                 break;
             case 3:

@@ -46,7 +46,7 @@ public class LoginUsuario {
                     String contraseña = resultado.getString("contraseña");
                     String rol = resultado.getString("rol");
 
-                    usuario = new Usuario(nombre, dni, email, contraseña, rol);
+                     usuario = new Usuario(nombre, dni, email, contraseña, rol);
 
                     if (verificarAdmin(email, contra)) {
                         System.out.println("Has iniciado sesión como admin");

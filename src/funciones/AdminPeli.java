@@ -26,7 +26,7 @@ public class AdminPeli {
 	        } else {
 	            System.out.println("Todas las reservas:");
 	            while (resultSet.next()) { // Iterar sobre los resultados
-	                System.out.println(", Código: " + resultSet.getInt("count(codigo)") 
+	                System.out.println(" Código: " + resultSet.getInt("count(codigo)") 
 	                        
 	                        
 	                    );
@@ -37,21 +37,9 @@ public class AdminPeli {
 	        e.printStackTrace();
 	    }
 	    
-	    System.out.println("1. Volver al menú principal");
-	    System.out.print("Seleccione una opción: ");
-	    
-	    if (scanner.hasNextInt()) {
-	        int opcion = scanner.nextInt();
-	        scanner.nextLine(); // Consumir la nueva línea
-	        if (opcion == 1) {
-	            Menus.menuAdministrador(null, videoclub);
-	        }
-	    } else {
-	        System.out.println("Opción inválida. Regresando al menú principal.");
-	        scanner.nextLine(); // Limpiar la entrada
-	        Menus.menuAdministrador( null, videoclub);
+
 	    }
-	}
+	
 
 
 
@@ -83,20 +71,7 @@ public class AdminPeli {
 	        e.printStackTrace();
 	    }
 	    
-	    System.out.println("1. Volver al menú principal");
-	    System.out.print("Seleccione una opción: ");
 	    
-	    if (scanner.hasNextInt()) {
-	        int opcion = scanner.nextInt();
-	        scanner.nextLine(); // Consumir la nueva línea
-	        if (opcion == 1) {
-	            Menus.menuAdministrador( null, null);
-	        }
-	    } else {
-	        System.out.println("Opción inválida. Regresando al menú principal.");
-	        scanner.nextLine(); // Limpiar la entrada
-	        Menus.menuAdministrador( null, null);
-	    }
 	}
 
 	
@@ -104,7 +79,7 @@ public static void ContarUsuarios(Usuario usuario) throws SQLException {
     System.out.println("\n--- Contar Todos Los Usuarios ---");
     
     // Consulta para filtrar las reservas por DNI
-    String query = "SELECT count(dni) FROM reserva";
+    String query = "SELECT  count(dni) FROM usuario" ;
     
     try (PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)) {
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -115,10 +90,8 @@ public static void ContarUsuarios(Usuario usuario) throws SQLException {
         } else {
             System.out.println("Todas las reservas:");
             while (resultSet.next()) { // Iterar sobre los resultados
-                System.out.println("Fecha Reserva: " + resultSet.getString("fechaReserva") +
-                        ", Código: " + resultSet.getInt("codigo") +
-                        ", DNI: " + resultSet.getString("dni") +
-                        ", Código Película: " + resultSet.getInt("codigoPelicula"));
+                System.out.println("Cantidad de usuarios: " + resultSet.getString("count(dni)"));
+                        
             }
         }
     } catch (SQLException e) {
@@ -126,20 +99,7 @@ public static void ContarUsuarios(Usuario usuario) throws SQLException {
         e.printStackTrace();
     }
     
-    System.out.println("1. Volver al menú principal");
-    System.out.print("Seleccione una opción: ");
-    
-    if (scanner.hasNextInt()) {
-        int opcion = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
-        if (opcion == 1) {
-            Menus.menuAdministrador(null, null);
-        }
-    } else {
-        System.out.println("Opción inválida. Regresando al menú principal.");
-        scanner.nextLine(); // Limpiar la entrada
-        Menus.menuAdministrador( null, null);
-    }
+   
 }
 
 public static void PrecioTotal(Usuario usuario) throws SQLException {
@@ -164,23 +124,9 @@ public static void PrecioTotal(Usuario usuario) throws SQLException {
     } catch (SQLException e) {
         System.out.println("Error al obtener las reservas: " + e.getMessage());
         e.printStackTrace();
-    }
-    
-    System.out.println("1. Volver al menú principal");
-    System.out.print("Seleccione una opción: ");
-    
-    if (scanner.hasNextInt()) {
-        int opcion = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
-        if (opcion == 1) {
-            Menus.menuAdministrador (null, null);
-        }
-    } else {
-        System.out.println("Opción inválida. Regresando al menú principal.");
-        scanner.nextLine(); // Limpiar la entrada
-        Menus.menuAdministrador( null, null);
-    }
-}
+   
+    	}
+	}
 }
 
 

@@ -32,6 +32,7 @@ public class ConsultarPeli {
 			     preparedStatement.setString(2, videoclub.getLocalidad());
 			     ResultSet resultSet = preparedStatement.executeQuery();
 			     //Si no se  se encuentra el genero muestra el mensaje
+			     
 			     if (!resultSet.isBeforeFirst()) {
 			         System.out.println("No se encontraron peliculas con ese genero: " + genero);
 			     } else {
@@ -48,15 +49,7 @@ public class ConsultarPeli {
 			         }
 			     }
 			 
-			 
-			 System.out.println("1. volver al menu principal");
-			 int opcion=scanner.nextInt();
-			 switch (opcion) {
-
-				case 1:
-					Menus.menuSecundario( scanner, videoclub, null);
-					break;
-			 	}
+	
 			 }
 	
 	public static  void MostarPelisPorPrecio(double precio,Videoclub videoclub) throws SQLException {
@@ -84,16 +77,9 @@ public class ConsultarPeli {
 			         	}
 			         }
 			     }
-			 
-			 System.out.println("1. volver al menu principal");
-			 int opcion=scanner.nextInt();
-			 switch (opcion) {
-
-				case 1:
-					Menus.menuSecundario( scanner, videoclub,null);
-					break;
-			 	}
+		
 			 }
+			 
 			 
 	
 	
@@ -135,14 +121,6 @@ public class ConsultarPeli {
             throw e;
         }
         
-         System.out.println("1. volver al menu principal");
-         int opcion=scanner.nextInt();
-         switch (opcion) {
-
-            case 1:
-                Menus.menuSecundario( scanner, videoclub,usuario);
-                break;
-             }
          }
 	
 	
@@ -176,14 +154,6 @@ public class ConsultarPeli {
 		         	}
 		         }
 		     }
-		 System.out.println("1. volver al menu principal");
-		 int opcion=scanner.nextInt();
-		 switch (opcion) {
-
-			case 1:
-				Menus.menuSecundario( scanner, videoclub, null);
-				break;
-		 	}
 		 }
 		 
 	
@@ -213,14 +183,6 @@ public class ConsultarPeli {
 			         	}
 			         }
 			     }
-			 System.out.println("1. volver al menu principal");
-			 int opcion=scanner.nextInt();
-			 switch (opcion) {
-
-				case 1:
-					Menus.menuSecundario(scanner, videoclub, null);
-					break;
-			 	}
 			 }
 	
 	
@@ -234,22 +196,7 @@ public class ConsultarPeli {
 	
 	
 	
-	public  static void  volverMenu() {
-		System.out.println("1. volver al menu principal");
-		 int opcion=scanner.nextInt();
-		 switch (opcion) {
-
-			case 1:
-			try {
-				Menus.menuSecundario(null, null, null);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-				break;
-		 	}
-		 }
-
+	
 
 	public static void MostrarReservas(Usuario usuario, Videoclub videoclub) throws SQLException {
 	    System.out.println("\n--- Mostrar Todas Las Reservas ---");

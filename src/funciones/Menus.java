@@ -111,7 +111,7 @@ public class Menus {
                     String fechaout = sc.next();
                     sc.nextLine();
                     ConsultarPeli.realizarReserva(codigo, usuario, videoclub, fechain, fechaout);
-                    ConsultarPeli.volverMenu();
+               
                     break;
                 case 6:
                     ConsultarPeli.MostrarReservas(usuario, videoclub);

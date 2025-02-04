@@ -53,9 +53,8 @@ public class Registrar {
 			
 			String rol1 = elegirRol();
 			
+			String dni =scanner.nextLine();
 			
-			
-			String dni ="";
 			Usuario usuario=new Usuario(nombre,dni,email,contra,rol1);
 			// Conexión a la base de datos
 			Connection conexion = DriverManager.getConnection(url, usuarioBD, contrasenaBD);

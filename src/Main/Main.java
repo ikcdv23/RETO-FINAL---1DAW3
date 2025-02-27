@@ -16,13 +16,13 @@ public class Main {
             conectorBD.conectar();
             
             // Iniciar sesión o registrarse
-            Usuario usuario = Menus.menuInicial();
+			Usuario usuario = Menus.menuInicial();
 
             // Elegir la oficina antes de acceder al menú secundario
             Videoclub videoclub = Menus.elegirOficina(usuario);
 
             // Menú de opciones
-            Menus.menuSecundario(sc,videoclub, usuario);
+           
             
             Menus.menuAdministrador(usuario,videoclub);
 

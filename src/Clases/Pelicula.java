@@ -18,6 +18,9 @@ public class Pelicula {
 	
 	
 
+	
+
+
 	public String getNombre() {
 		return nombre;
 	}

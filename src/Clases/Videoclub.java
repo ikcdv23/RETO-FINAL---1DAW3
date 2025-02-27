@@ -24,6 +24,13 @@ public class Videoclub {
 	public void setNIF(int nIF) {
 		NIF = nIF;
 	}
+
+
+
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 	

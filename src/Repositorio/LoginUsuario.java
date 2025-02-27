@@ -9,46 +9,46 @@ import java.util.Scanner;
 
 import Clases.Usuario;
 import Clases.Videoclub;
+import conectorBD.conectorBD;
 import funciones.Menus;
 
 public class LoginUsuario {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/videoclub";
-    private static final String USUARIO_BD = "root";
-    private static final String CONTRASENA_BD = "1DAW3_BBDD";
-
+	//Le pides al usuario los datos para iniciar sesion 
     public static Usuario iniciarSesion(Scanner scanner, Videoclub videoclub) throws SQLException {
-        System.out.print("Ingrese su email: ");
-        String email = scanner.nextLine().trim();
+        System.out.print("Ingrese su dni: ");
+        String dni = scanner.nextLine().trim();
 
         System.out.print("Ingrese su contraseña: ");
         String contra = scanner.nextLine().trim();
 
-        if (email.isEmpty() || contra.isEmpty()) {
+        if (dni.isEmpty() || contra.isEmpty()) {
             System.out.println("Email o contraseña no pueden estar vacíos.");
+            LoginUsuario.iniciarSesion(scanner, videoclub);
             return null;
         }
-
+        //Mediante la consulta se verifica que los datos tengan alguna coincidencia 
         Usuario usuario = null;
-        String consulta = "SELECT nombre, dni, email, contraseña, rol FROM usuario WHERE email = ? AND contraseña = ?";
+        String consulta = "SELECT nombre, dni, email, contraseña, rol FROM usuario WHERE dni = ? AND contraseña = ?";
 
-        try (Connection conexion = DriverManager.getConnection(URL, USUARIO_BD, CONTRASENA_BD);
-             PreparedStatement sentencia = conexion.prepareStatement(consulta)) {
-
-            sentencia.setString(1, email);
+        try (PreparedStatement sentencia = conectorBD.conexion.prepareStatement(consulta)) {
+             
+            sentencia.setString(1, dni);
             sentencia.setString(2, contra);
 
             try (ResultSet resultado = sentencia.executeQuery()) {
+            	
                 if (resultado.next()) {
                     System.out.println("¡Inicio de sesión exitoso!");
                     String nombre = resultado.getString("nombre");
-                    String dni = resultado.getString("dni");
+                     dni = resultado.getString("dni");
+                    String email = resultado.getString("email");
                     String contraseña = resultado.getString("contraseña");
                     String rol = resultado.getString("rol");
-
+                    //Se crea un objeto de Usuario para guardar el usuario
                      usuario = new Usuario(nombre, dni, email, contraseña, rol);
 
-                    if (verificarAdmin(email, contra)) {
+                    if (verificarAdmin(dni, contra)) {
                         System.out.println("Has iniciado sesión como admin");
                         Menus.menuAdministrador(usuario, videoclub);
                     } else {
@@ -67,18 +67,18 @@ public class LoginUsuario {
         return usuario;
     }
 
-    public static boolean verificarAdmin(String email, String contrasena) {
-        String sql = "SELECT rol FROM usuario WHERE email = ? AND contraseña = ?";
+    public static boolean verificarAdmin(String dni, String contrasena) {
+        String sql = "SELECT rol FROM usuario WHERE dni = ? AND contraseña = ?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USUARIO_BD, CONTRASENA_BD);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = conectorBD.conexion.prepareStatement(sql)) {;
+             
 
-            stmt.setString(1, email);
+            stmt.setString(1, dni);
             stmt.setString(2, contrasena);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return "Administrador".equalsIgnoreCase(rs.getString("rol"));
+					return "Administrador".equalsIgnoreCase(rs.getString("rol"));
                 }
             }
         } catch (SQLException e) {

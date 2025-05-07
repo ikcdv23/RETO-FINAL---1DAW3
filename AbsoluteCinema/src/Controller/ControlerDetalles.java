@@ -27,8 +27,8 @@ public class ControlerDetalles {
 				volver();
 			}
 		});
-	
-	
+	}
+	/*
 
 	this.vista.getBotonFichero().addActionListener(new ActionListener(){
 		@Override
@@ -131,7 +131,7 @@ public class ControlerDetalles {
 
 	
 	
-
+*/
 	 public void volver() {		 	
 	        // Cerrar la ventana actual
 	        vista.dispose();
@@ -146,7 +146,7 @@ public class ControlerDetalles {
 	 }
 	public void iniciar() {
         vista.setVisible(true);
-    }
+	}  
 }
 	
 

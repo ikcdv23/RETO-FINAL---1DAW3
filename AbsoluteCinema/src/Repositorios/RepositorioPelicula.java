@@ -32,21 +32,21 @@ public class RepositorioPelicula {
 }
  return peliculas;
 }
-	public static void peli(int id_pelicula, String titulo, String director, String duracion, String genero, String sinopsis,
-			String pais_origen, int anio_lanzamiento)  {
+	public static void peli(String id_pelicula, String titulo, String director, String duracion, String genero, String sinopsis,
+			String pais_origen, String anio_lanzamiento)  {
 
 		 String query="insert into peliculas (nombre, marca,categoria, talla, precio) values  (?,?,?,?,?)";
 		 try(PreparedStatement preparedStatement = conectorBD.conexion.prepareStatement(query)){
 			{
 				 
-				 preparedStatement.setInt(1,id_pelicula);
+				 preparedStatement.setString(1,id_pelicula);
 				 preparedStatement.setString(2,titulo);
 				 preparedStatement.setString(3,director);
 				 preparedStatement.setString(4,duracion);
 				 preparedStatement.setString(5,genero);
 				 preparedStatement.setString(6,sinopsis);
 				 preparedStatement.setString(7,pais_origen);
-				 preparedStatement.setInt(8,anio_lanzamiento);
+				 preparedStatement.setString(8,anio_lanzamiento);
 				 preparedStatement.executeUpdate();
 			 }
 		 } catch (SQLException e) {

@@ -18,7 +18,7 @@ public class Main {
 		        
 		        //Iniciamos la vista.
 		        controlador.iniciar();
-		        //asda
+		       
 		      
 
 	}
